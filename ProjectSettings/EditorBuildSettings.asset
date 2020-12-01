@@ -18,6 +18,6 @@ EditorBuildSettings:
     path: Assets/OpenHaptics/HapticDemos/hapticPuzzle.unity
     guid: aa9348be42bbb0e46b614fe37136c076
   - enabled: 1
-    path: Assets/VisualPuzzle/projectEx4.unity
+    path: Assets/ChargedParticlePlayground/projectEx4.unity
     guid: cd758cb32ceb6f149a418bd2a08e55ff
   m_configObjects: {}

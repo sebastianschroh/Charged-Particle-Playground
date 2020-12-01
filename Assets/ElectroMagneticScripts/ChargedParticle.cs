@@ -5,25 +5,16 @@ using UnityEngine;
 public class ChargedParticle : MonoBehaviour
 {
     public float charge = 1.0f;
-    protected static List<MovableChargedParticle> movableChargedParticles;
-    protected const float Kelec = 100000;
+    protected static List<ChargedParticle> chargedParticles;
+    protected const float Kelec = 1000;
     // Start is called before the first frame update
     void Start()
     {
         ColorParticle();
-        if(movableChargedParticles == null)
-            movableChargedParticles = new List<MovableChargedParticle>();
-    }
+        if(chargedParticles == null)
+            chargedParticles = new List<ChargedParticle>();
 
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        foreach(MovableChargedParticle particle in movableChargedParticles)
-        {
-            Vector3 totalAppliedForce = Vector3.zero;
-            totalAppliedForce += CalculateElectricForce(particle);
-            particle.rigidbody.AddForce(totalAppliedForce);
-        }
+        chargedParticles.Add(this);
     }
 
     protected void ColorParticle()
@@ -46,7 +37,7 @@ public class ChargedParticle : MonoBehaviour
         GetComponent<Renderer>().material.color = color;
     }
 
-    protected Vector3 CalculateElectricForce(MovableChargedParticle particle)
+    protected Vector3 CalculateElectricForce(ChargedParticle particle)
     {
         float distance = Vector3.Distance(particle.transform.position, this.transform.position);
 
@@ -63,6 +54,11 @@ public class ChargedParticle : MonoBehaviour
         Vector3 electricForce = force * direction;
 
         return electricForce;
+    }
+
+    public virtual Vector3 GetForce(ChargedParticle particle)
+    {
+        return CalculateElectricForce(particle);
     }
 
 
